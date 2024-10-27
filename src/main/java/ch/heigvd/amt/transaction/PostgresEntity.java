@@ -10,6 +10,7 @@ public class PostgresEntity {
     private int id;
 
     public PostgresEntity() {
+        // Required by JPA
     }
 
     public PostgresEntity(int id) {

@@ -3,16 +3,13 @@ package ch.heigvd.amt.transaction;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.SystemException;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static java.sql.Connection.TRANSACTION_SERIALIZABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -50,11 +47,11 @@ class TransactionServiceTest {
         } catch (Exception e) {
             // Ignore
         }
-        try(var connection = mysqlDataSource.getConnection()) {
-            connection.setTransactionIsolation(Connection.TRANSACTION_NONE);
-            connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
-            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-            connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+        try (var connection = mysqlDataSource.getConnection()) {
+            // connection.setTransactionIsolation(Connection.TRANSACTION_NONE);
+            // connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+            // connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            // connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             var resultSet = connection.createStatement().executeQuery("SELECT * FROM mysql");
             int count = 0;
@@ -74,7 +71,7 @@ class TransactionServiceTest {
         } catch (Exception e) {
             // Ignore
         }
-        try(var connection = mariaDataSource.getConnection()) {
+        try (var connection = mariaDataSource.getConnection()) {
             var resultSet = connection.createStatement().executeQuery("SELECT * FROM maria");
             int count = 0;
             while (resultSet.next()) {

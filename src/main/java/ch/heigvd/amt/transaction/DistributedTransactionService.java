@@ -9,7 +9,8 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 public class DistributedTransactionService {
 
-    @Inject TransactionManager transactionManager;
+    @Inject
+    TransactionManager transactionManager;
 
     @Inject
     MariaDAO mariaDAO;

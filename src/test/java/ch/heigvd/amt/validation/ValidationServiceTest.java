@@ -5,8 +5,6 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @QuarkusTest
 class ValidationServiceTest {
 
@@ -40,7 +38,7 @@ class ValidationServiceTest {
         try {
             Person person = new Person();
             validationService.automaticValidation(person);
-        }  catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             e.getConstraintViolations().forEach(violation -> System.out.println(violation.getMessage()));
         }
     }

@@ -8,7 +8,6 @@ import jakarta.validation.Validator;
 
 import java.util.Set;
 
-
 @ApplicationScoped
 public class ValidationService {
 
